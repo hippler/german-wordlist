@@ -1,0 +1,58 @@
+File: words-with-special-characters.txt, Stefan Hippler, 3 January 2023
+-----------------------------------------------------------------------
+Special characters can also be called letters with diacritics...
+
+Total numbers of words in words:
+
+cat words |wc -> 685683  685689 8642725 (discrepancy between words and lines???)
+
+
+*** German special characters: ß
+
+grep ß words |wc
+
+ß:   11974   11974  168134
+
+*** French special characters: '[àâçèéêëîïôùûÿæœ]'
+
+à:       7       9      57
+â:       3       3      36
+
+ç:      14      14     165
+
+è:      72      72     788
+é:     296     296    3023
+ê:       8       8      64
+ë:       1       1       6
+
+î:       2       2      17
+ï:       0       0       0
+
+ô:       0       0       0
+
+ù:       0       0       0
+û:       2       2      19
+
+ÿ:       0       0       0
+
+æ:       0       0       0
+
+œ:       5       5      43
+
+grep '[àâçèéêëîïôùûÿæœ]' words |wc -> 404, ie 6 words have 2 special characters like Séparée or Négligé ...
+
+[ÀÂÇÈ]:   0
+É:        3       3      41
+[ËÎÏ]:    0
+[ÔÙÛŸÆ]:  0
+Œ:        2       2      15
+
+grep '[ÀÂÇÈÉËÎÏÔÙÛŸÆŒ]' words |wc -> 5
+
+Cross-check:
+cat words | wc                                        -> 685683  685689 8642725 (total number of words in words)
+grep -v '[ßàâçèéêëîïôùûÿæœÀÂÇÈÉËÎÏÔÙÛŸÆŒ]' words | wc -> 673305  673309 8470474 (words NOT containing the special characters above)
+grep    '[ßàâçèéêëîïôùûÿæœÀÂÇÈÉËÎÏÔÙÛŸÆŒ]' words | wc -> 12378   12380  172251  (words containing the special characters above)
+
+Difference:                                               -> 0 (ok, very nice)
+
