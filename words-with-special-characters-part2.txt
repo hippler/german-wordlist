@@ -1,0 +1,73 @@
+------------------------------------------------------------------------------
+File: words-with-special-characters-part2.txt, Stefan Hippler, 4 January 2023.
+------------------------------------------------------------------------------
+
+All these characters, '[åčēīíłñōóõšūú]', have been replaced with their corresponding single german letter.
+
+At the end, all doubles have been removed, ie with this command:
+cat words-with-doubles.txt | uniq > words.txt
+
+The latter command also removes doubles resulted from the german Eszett and french diacritics "correction".
+
+Simple analysis:
+
+grep -i '[åčēīíłñōóõšūú]' words | wc
+      55      59     501
+
+grep -i '[åčēīíłñōóõšūú]' words
+
+Ångström - Angström
+Ångströms - Angströms
+Åsar -> not in Duden
+Bahuvrīhi - not in Duden
+Bokmål - Bokmal
+Bokmåls - Bokmals
+Botellón - Botellon
+Botellóns - Botellons
+Brač - not in Duden
+Burúshaski - not in Duden
+Caló - not in Duden
+Cariñena - not in Duden
+Cariñenas - not in Duden
+Córdoba - Cordoba
+Córdobas - Cordobas
+Dimotikí - not in Duden
+Dōjinshi - not in Duden
+Dōjinshis - not in Duden
+Doña - Dona
+Doñas - Donas
+Guaraní - Guarani
+Kōan - Koan
+Kōans - Koans
+Kyū - Kyu
+Landsmål - Landsmal
+Landsmåls - Landsmals
+Malagueña - Malaguena
+Malagueñas - Malaguenas
+Nasobēm - Nasobem
+Nasobēme - Nasobeme
+Nasobēmen - Nasobemen
+Nasobēmes - Nasobemes
+Nasobēms - Nasobems
+Patrónit - not in Duden
+Patrónite - not in Duden
+Patróniten - not in Duden
+Patrónits - not in Duden
+Riksmål - Riksmal
+Riksmåls - Riksmals
+Señor - Senor
+Señora - Senora
+Señorita - Senorita
+Šeqel - not in Duden
+Shōgun - Shogun
+Shōgune - Shogune
+Shōgunen - Shogunen
+Shōguns - Shoguns
+skål - skal
+Taíno - not in Duden
+Tupí - Tupi
+Turrón - not in Duden
+Võro - not in Duden
+Wayapopihíwi not in Duden
+Złoty - Zloty
+Złotys - Zlotys

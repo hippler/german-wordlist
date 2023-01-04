@@ -1,58 +1,79 @@
-File: words-with-special-characters.txt, Stefan Hippler, 3 January 2023
 -----------------------------------------------------------------------
-Special characters can also be called letters with diacritics...
+File: words-with-special-characters.txt, Stefan Hippler, 4 January 2023
+-----------------------------------------------------------------------
 
-Total numbers of words in words:
+Note: special characters can also be called letters with diacritics...
+Analysis is done using the standard Unix comands grep and wc.
 
-cat words |wc -> 685683  685689 8642725 (discrepancy between words and lines???)
+The output of wc (word count) shows in the first column the number of newlines.
+The second column shows the number of words. The third column shows the number of bytes.
+The last column shows the analyzed file name.
 
+Analyzed is the orignal german wordlist file, named words, from Markus Enzberger.
+See: [ https://github.com/enz/german-wordlist ]
 
-*** German special characters: ß
+---> Simple analysis <---
 
-grep ß words |wc
+a) Total numbers of words in words:
 
-ß:   11974   11974  168134
+   wc words -> 685683  685689 8642725 words
 
-*** French special characters: '[àâçèéêëîïôùûÿæœ]'
+   Note: discrepancy, 6 words more than lines
 
-à:       7       9      57
-â:       3       3      36
+b) German special character ß (Eszett)
 
-ç:      14      14     165
+   grep ß words |wc
 
-è:      72      72     788
-é:     296     296    3023
-ê:       8       8      64
-ë:       1       1       6
+   ß: 11974   11974  168134
 
-î:       2       2      17
-ï:       0       0       0
+c) French special lowercase characters '[àâçèéêëîïôùûÿæœ]'
 
-ô:       0       0       0
+   à:       7       9      57
+   â:       3       3      36
+   ç:      14      14     165
+   è:      72      72     788
+   é:     296     296    3023
+   ê:       8       8      64
+   ë:       1       1       6
+   î:       2       2      17
+   ï:       0       0       0
+   ô:       0       0       0
+   ù:       0       0       0
+   û:       2       2      19
+   ÿ:       0       0       0
+   æ:       0       0       0
+   œ:       5       5      43
 
-ù:       0       0       0
-û:       2       2      19
+   Total: 410     412    4218
 
-ÿ:       0       0       0
+   grep '[àâçèéêëîïôùûÿæœ]' words |wc
+     404     406    4131
 
-æ:       0       0       0
+   ie 12 words have 2 special characters:
+   Abrégé, Abrégés, Déshabillé, Déshabillés, Négligé, Négligés, 
+   Résumé, Résumés, Séparée, Séparées, Variété, Variétés
 
-œ:       5       5      43
+d) French special uppercase characters [ÀÂÇÈÉËÎÏÔÙÛŸÆŒ]
 
-grep '[àâçèéêëîïôùûÿæœ]' words |wc -> 404, ie 6 words have 2 special characters like Séparée or Négligé ...
+   [ÀÂÇÈ]:   0
+   É:        3       3      41
+   [ËÎÏ]:    0
+   [ÔÙÛŸÆ]:  0
+   Œ:        2       2      15
 
-[ÀÂÇÈ]:   0
-É:        3       3      41
-[ËÎÏ]:    0
-[ÔÙÛŸÆ]:  0
-Œ:        2       2      15
+   grep '[ÀÂÇÈÉËÎÏÔÙÛŸÆŒ]' words |wc -> 5       5      56
 
-grep '[ÀÂÇÈÉËÎÏÔÙÛŸÆŒ]' words |wc -> 5
+   Égalité, Étalonsprache, Étalonsprachen, Œuvre, Œuvres
 
+---------------------------------------------------------
 Cross-check:
-cat words | wc                                        -> 685683  685689 8642725 (total number of words in words)
-grep -v '[ßàâçèéêëîïôùûÿæœÀÂÇÈÉËÎÏÔÙÛŸÆŒ]' words | wc -> 673305  673309 8470474 (words NOT containing the special characters above)
-grep    '[ßàâçèéêëîïôùûÿæœÀÂÇÈÉËÎÏÔÙÛŸÆŒ]' words | wc -> 12378   12380  172251  (words containing the special characters above)
+---------------------------------------------------------
 
-Difference:                                               -> 0 (ok, very nice)
+wc words                                              -> 685683  685689 8642725 # total lines, words, bytes
+grep -v '[ßàâçèéêëîïôùûÿæœÀÂÇÈÉËÎÏÔÙÛŸÆŒ]' words | wc -> 673305  673309 8470474 # words without any of the special chars listed
+grep    '[ßàâçèéêëîïôùûÿæœÀÂÇÈÉËÎÏÔÙÛŸÆŒ]' words | wc ->  12378   12380  172251 # words with any of the special chars listed
+
+Difference:                                           ->      0       0       0 # ok, very nice
+
+# end of file
 
